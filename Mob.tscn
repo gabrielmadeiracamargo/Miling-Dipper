@@ -33,8 +33,10 @@ height = 0.0145559
 [node name="Mob" type="RigidBody2D" groups=[
 "mobs",
 ]]
+scale = Vector2( 1.5, 1.5 )
 collision_mask = 0
-gravity_scale = 0.0
+mass = 0.1
+gravity_scale = 0.7
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_group_": true
@@ -44,7 +46,6 @@ __meta__ = {
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "suamae"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

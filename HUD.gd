@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal start_game
+signal gameover
 
 func show_message(text):
 	$Message.text = text
@@ -8,6 +9,7 @@ func show_message(text):
 	$MessageTimer.start()
 	
 func show_game_over():
+	emit_signal("gameover")
 	show_message("Game Over!")
 	yield($MessageTimer, "timeout")
 	$Message.text = "Miling Dipper"

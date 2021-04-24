@@ -2,16 +2,24 @@ extends Node
 
 export (PackedScene) var Mob
 var score
+var life = 1
 
 func _ready():
 	randomize()
 	#new_game()
 
 func game_over():
-	$ScoreTimer.stop()
-	$MobTimer.stop()
-	$HUD.show_game_over()
-	get_tree().call_group("mobs", "queue_free")
+	life -= 1
+	$Player/AnimatedSprite.scale.x = 1
+	$Player/CollisionShape2D.scale.x = 1
+	$Player/AnimatedSprite.scale.y = 1
+	$Player/CollisionShape2D.scale.y = 1 
+	
+	if life <= 0:
+		$ScoreTimer.stop()
+		$MobTimer.stop()
+		$HUD.show_game_over()
+		get_tree().call_group("mobs", "queue_free")
 
 func new_game():
 	score = 0
@@ -28,17 +36,17 @@ func _on_StartTimer_timeout():
 
 func _on_ScoreTimer_timeout():
 	score += 1
-	if score == 10:
-		$Player/AnimatedSprite.scale.x = 2
-		$Player/CollisionShape2D.scale.x = 2
-		$Player/AnimatedSprite.scale.y = 2
-		$Player/CollisionShape2D.scale.y = 2
-		
 	$HUD.update_score(score)
-
-
+	if score == 10:
+		life +=1
+		$Player/AnimatedSprite.scale.x += 1
+		$Player/CollisionShape2D.scale.x += 1
+		$Player/AnimatedSprite.scale.y += 1
+		$Player/CollisionShape2D.scale.y +=1
+		
+		
 func _on_MobTimer_timeout():
-	$MobPath/MobSpawnLocation.offset = randi()
+	$MobPath/MobSpawnLocation.offset = randi() * 2
 	var mob = Mob.instance()
 	add_child(mob)
 	var direction = $MobPath/MobSpawnLocation.rotation + PI / 2
