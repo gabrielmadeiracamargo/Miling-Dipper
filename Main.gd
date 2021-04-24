@@ -10,11 +10,15 @@ func _ready():
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
+	$HUD.show_game_over()
+	get_tree().call_group("mobs", "queue_free")
 
 func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
+	$HUD.update_score(score)
+	$HUD.show_message("Get Ready")
 
 
 func _on_StartTimer_timeout():
@@ -24,6 +28,13 @@ func _on_StartTimer_timeout():
 
 func _on_ScoreTimer_timeout():
 	score += 1
+	if score == 10:
+		$Player/AnimatedSprite.scale.x = 2
+		$Player/CollisionShape2D.scale.x = 2
+		$Player/AnimatedSprite.scale.y = 2
+		$Player/CollisionShape2D.scale.y = 2
+		
+	$HUD.update_score(score)
 
 
 func _on_MobTimer_timeout():

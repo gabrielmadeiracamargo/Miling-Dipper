@@ -2,19 +2,21 @@ extends Area2D
 
 signal hit
 
-export var speed = 100
+export var speed = 100 
 var velocity2 = Vector2.ZERO
 var screen_size
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	#hide()
+	hide()
 
 func _process(delta):
 	var velocity = Vector2.ZERO
 	velocity.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left") 
 	velocity.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up") 
 	
+	print(speed)
+	print (velocity.length())
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		$AnimatedSprite.play()
