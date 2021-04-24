@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+extra_spacing_top = -10
 font_data = ExtResource( 1 )
 
 [sub_resource type="InputEventAction" id=2]
@@ -19,10 +23,23 @@ script = ExtResource( 2 )
 [node name="ScoreLabel" type="Label" parent="."]
 anchor_bottom = 1.0
 margin_left = 15.0
-margin_top = 10.0
+margin_top = 18.0
+margin_right = 38.0
+margin_bottom = 6.0
 custom_fonts/font = SubResource( 1 )
 text = "0"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreIndicador" type="Label" parent="."]
+margin_left = 4.60315
+margin_top = 13.0
+margin_right = 53.6031
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 4 )
+text = "Score"
 __meta__ = {
 "_edit_use_anchors_": false
 }

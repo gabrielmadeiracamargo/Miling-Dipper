@@ -8,6 +8,9 @@ func _ready():
 	randomize()
 	#new_game()
 
+func _process(delta):
+	$Vidas.text = str(life)
+
 func game_over():
 	life -= 1
 	$Player/AnimatedSprite.scale.x = 1
@@ -28,7 +31,6 @@ func new_game():
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
 
-
 func _on_StartTimer_timeout():
 	$ScoreTimer.start()
 	$MobTimer.start()
@@ -37,7 +39,7 @@ func _on_StartTimer_timeout():
 func _on_ScoreTimer_timeout():
 	score += 1
 	$HUD.update_score(score)
-	if score == 10:
+	if score % 10 == 0:
 		life +=1
 		$Player/AnimatedSprite.scale.x += 1
 		$Player/CollisionShape2D.scale.x += 1
