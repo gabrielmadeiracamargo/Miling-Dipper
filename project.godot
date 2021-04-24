@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="Deeper And Deeper 2"
+config/name="Miling Dipper"
 run/main_scene="res://Player.tscn"
 config/icon="res://icon.png"
 
