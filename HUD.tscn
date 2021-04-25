@@ -7,15 +7,15 @@
 size = 32
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 extra_spacing_top = -10
 font_data = ExtResource( 1 )
 
-[sub_resource type="InputEventAction" id=2]
+[sub_resource type="InputEventAction" id=3]
 action = "ui_select"
 
-[sub_resource type="ShortCut" id=3]
-shortcut = SubResource( 2 )
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 3 )
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -38,7 +38,7 @@ margin_left = 4.60315
 margin_top = 13.0
 margin_right = 53.6031
 margin_bottom = 23.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Score"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -68,7 +68,7 @@ margin_top = -50.0
 margin_right = 47.5
 margin_bottom = -5.0
 custom_fonts/font = SubResource( 1 )
-shortcut = SubResource( 3 )
+shortcut = SubResource( 4 )
 text = "Start"
 __meta__ = {
 "_edit_use_anchors_": false

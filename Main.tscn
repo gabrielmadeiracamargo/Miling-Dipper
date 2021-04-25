@@ -22,22 +22,11 @@ font_data = ExtResource( 5 )
 script = ExtResource( 3 )
 Mob = ExtResource( 1 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -0.896851
-margin_right = -0.896851
-color = Color( 0.686275, 0.796078, 0.843137, 0.588235 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -39.0398, -39.7889 )
-Main = null
 
 [node name="MobTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 3.0
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
@@ -52,6 +41,15 @@ position = Vector2( 160, 90 )
 curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.686275, 0.796078, 0.784314, 0.490196 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 

@@ -2,9 +2,9 @@ extends Area2D
 
 signal hit
 
-export (PackedScene) var Main
+#export (PackedScene) var Main
 
-export var speed = 100 
+export var speed = 125
 var velocity2 = Vector2.ZERO
 var screen_size
 
@@ -39,7 +39,7 @@ func _process(delta):
 		$AnimatedSprite.flip_h = velocity.y < 0
 
 
-func _on_Player_body_entered(body):
+func _on_Player_body_entered(_body):
 	emit_signal("hit")
 	$CollisionShape2D.set_deferred("disabled", true) 
 	yield(get_tree().create_timer(0.2), "timeout")
@@ -56,3 +56,4 @@ func start(pos): #
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
+

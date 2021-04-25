@@ -1,7 +1,7 @@
 extends RigidBody2D
 
-export var min_speed = 150
-export var max_speed = 200
+var min_speed = 150
+var max_speed = 200
 
 func _ready(): 
 	var mob_types = $AnimatedSprite.frames.get_animation_names()
