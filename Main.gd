@@ -2,7 +2,7 @@ extends Node
 
 export (PackedScene) var Mob
 var score : int = 0
-var life = 1
+var life = 0
 
 const SAVE_DIR = "user://saves/"
 var save_path = SAVE_DIR + "save.dat"
@@ -13,7 +13,7 @@ func _ready():
 
 func _process(_delta):
 	save_highscore()
-	$Vidas.text = str(life)
+	$Vidas.text = str(life + 1)
 
 func game_over():
 	life -= 1
@@ -53,6 +53,11 @@ func _on_ScoreTimer_timeout():
 	if score % 10 == 0:
 		life +=1
 		if ($Player/AnimatedSprite.scale.x <= 2 && $Player/AnimatedSprite.scale.y <= 2):
+			$Player/AnimatedSprite.scale.x += 0.1
+			$Player/CollisionShape2D.scale.x += 0.1
+			$Player/AnimatedSprite.scale.y += 0.1
+			$Player/CollisionShape2D.scale.y += 0.1 
+			
 			$Player/AnimatedSprite.scale.x += 0.1
 			$Player/CollisionShape2D.scale.x += 0.1
 			$Player/AnimatedSprite.scale.y += 0.1
