@@ -27,6 +27,10 @@ func game_over():
 		$ScoreTimer.stop()
 		$MobTimer.stop()
 		$HUD.show_game_over()
+		$HighScore.show()
+		$HighScore.text = "High Score:\n" + str(highscore)
+		yield(get_tree().create_timer(2), "timeout")
+		$HighScore.hide()
 		get_tree().call_group("mobs", "queue_free")
 
 func new_game():
