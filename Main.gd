@@ -2,6 +2,7 @@ extends Node
 
 export (PackedScene) var Mob
 var score : int = 0
+var isnewhighscore : bool = false
 var life = 0
 
 const SAVE_DIR = "user://saves/"
@@ -27,8 +28,11 @@ func game_over():
 		$ScoreTimer.stop()
 		$MobTimer.stop()
 		$HUD.show_game_over()
+		$DeathSound.play()
 		$HighScore.show()
 		$HighScore.text = "High Score:\n" + str(highscore)
+		if (isnewhighscore == true):
+			$HighScore.text += "\nNew High Score!"
 		yield(get_tree().create_timer(2), "timeout")
 		$HighScore.hide()
 		get_tree().call_group("mobs", "queue_free")
@@ -71,16 +75,18 @@ func _on_MobTimer_timeout():
 	var direction = $MobPath/MobSpawnLocation.rotation + PI / 2
 	mob.position = $MobPath/MobSpawnLocation.position
 	direction += rand_range(-PI / 4, PI / 4)
-	mob.rotation = direction
+	mob.rotation = direction 
 	mob.linear_velocity = Vector2(rand_range(mob.min_speed, mob.max_speed), 0)
 	mob.linear_velocity = mob.linear_velocity.rotated(direction)
-	
+
 var highscore : int = 0
 
 func save_highscore() -> void:
 	if score <= highscore:
 		return
-	else: highscore = score
+	else: 
+		highscore = score
+		isnewhighscore = true
 	print(highscore)
 	
 	var file = File.new();

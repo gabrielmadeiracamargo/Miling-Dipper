@@ -22,6 +22,12 @@ func update_score(score):
 func _on_StartButton_pressed():
 	$StartButton.hide()
 	emit_signal("start_game")
+	$StartButton/Pressed.play()
+	
+func hover():
+	$StartButton/Hover.play()
 
 func _on_MessageTimer_timeout():
 	$Message.hide()
+
+

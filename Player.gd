@@ -4,18 +4,24 @@ signal hit
 
 #export (PackedScene) var Main
 
-export var speed = 125
-var velocity2 = Vector2.ZERO
+export var speed = 100
 var screen_size
 
 func _ready():
 	screen_size = get_viewport_rect().size
 	hide()
 
+var velocity = Vector2.ZERO
 func _process(delta):
-	var velocity = Vector2.ZERO
 	velocity.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left") 
 	velocity.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up") 
+	
+	if Input.get_action_strength("ui_shift"): 
+		speed = 150
+		$Particles2D.speed_scale = 2
+	else: 
+		speed = 100
+		$Particles2D.speed_scale = 1
 	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
@@ -29,15 +35,20 @@ func _process(delta):
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0, screen_size.y)
 
-	if velocity.x != 0:
+	if velocity.x != 0 && Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left") :
+		$Particles2D.emitting = true
 		$AnimatedSprite.animation = "nadar"
 		$AnimatedSprite.flip_v = false
 		$AnimatedSprite.flip_h = velocity.x < 0
 		$AnimatedSprite.rotation_degrees = 0
+		$Particles2D.position.x = -7
 	if velocity.y != 0 && Input.get_action_strength("ui_down") || Input.get_action_strength("ui_up") :
+		$Particles2D.emitting = true
 		$AnimatedSprite.rotation_degrees = 90
 		$AnimatedSprite.flip_h = velocity.y < 0
-
+		$Particles2D.position.x = 3
+		$Particles2D.position.y = 3
+		
 
 func _on_Player_body_entered(_body):
 	emit_signal("hit")
@@ -56,4 +67,3 @@ func start(pos): #
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
-

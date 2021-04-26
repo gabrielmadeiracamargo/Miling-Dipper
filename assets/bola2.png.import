@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bolha.png-af9892188aa0698d10ac4683cdb2c2c5.stex"
+path="res://.import/bola2.png-e0a7ceffcc4144e067c840fbff2195a9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bolha.png"
-dest_files=[ "res://.import/bolha.png-af9892188aa0698d10ac4683cdb2c2c5.stex" ]
+source_file="res://assets/bola2.png"
+dest_files=[ "res://.import/bola2.png-e0a7ceffcc4144e067c840fbff2195a9.stex" ]
 
 [params]
 

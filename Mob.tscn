@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/lula1.png" type="Texture" id=1]
 [ext_resource path="res://assets/lula2.png" type="Texture" id=2]
@@ -7,28 +7,35 @@
 [ext_resource path="res://assets/agua viva1.png" type="Texture" id=5]
 [ext_resource path="res://assets/suamae1.png" type="Texture" id=6]
 [ext_resource path="res://Mob.gd" type="Script" id=7]
+[ext_resource path="res://assets/bola2.png" type="Texture" id=8]
+[ext_resource path="res://assets/bola1.png" type="Texture" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "lula",
-"speed": 3.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "suamae",
-"speed": 3.0
+"speed": 4.0
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "aguaviva",
-"speed": 3.0
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "suamae",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "ball",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 8.36216
-height = 0.0145559
+radius = 10.5108
+height = 0.0
 
 [node name="Mob" type="RigidBody2D" groups=[
 "mobs",
@@ -45,12 +52,11 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
-animation = "suamae"
+animation = "lula"
 frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.5708
 shape = SubResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
