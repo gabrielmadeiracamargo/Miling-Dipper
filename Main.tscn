@@ -1,0 +1,193 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Mob.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Main.gd" type="Script" id=3]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/Xolonium-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/gameover.wav" type="AudioStream" id=6]
+[ext_resource path="res://Bubble.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/hit.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/pressed.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/hover.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/run1.png" type="Texture" id=11]
+[ext_resource path="res://assets/run2.png" type="Texture" id=12]
+[ext_resource path="res://assets/stop1.png" type="Texture" id=13]
+[ext_resource path="res://assets/stop2.png" type="Texture" id=14]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 320, 176, 0, 0, 0, 0, 53.0512, 178.95, 0, 0, 0, 0, -1.5, 177 )
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 5 )
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 178, 0, 0, 0, 0, 51.5, 176.5, 0, 0, 0, 0, 104, 176, 0, 0, 0, 0, 176, 176, 0, 0, 0, 0, 229.5, 175.5, 0, 0, 0, 0, 278, 176.5, 0, 0, 0, 0, 211.454, 175.528 )
+}
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 5 )
+
+[sub_resource type="InputEventAction" id=6]
+action = "ui_select"
+
+[sub_resource type="ShortCut" id=7]
+shortcut = SubResource( 6 )
+
+[node name="Main" type="Node"]
+script = ExtResource( 3 )
+Mob = ExtResource( 1 )
+Bubble = ExtResource( 7 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 646.785, 519.197 )
+
+[node name="BubbleTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="MobTimer" type="Timer" parent="."]
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartPosition" type="Position2D" parent="."]
+position = Vector2( 160, 90 )
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 0.629974
+margin_bottom = 0.629974
+color = Color( 0.0156863, 0.462745, 0.85098, 0.196078 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HUD" parent="." instance=ExtResource( 4 )]
+
+[node name="Lives" type="Label" parent="."]
+margin_left = 285.0
+margin_top = 18.0
+margin_right = 308.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BubblePath" type="Path2D" parent="."]
+position = Vector2( 10.3181, -3.17482 )
+curve = SubResource( 3 )
+
+[node name="BubbleFollow2D" type="PathFollow2D" parent="BubblePath"]
+position = Vector2( 0, 178 )
+rotation = -0.0291193
+
+[node name="LivesIndicator" type="Label" parent="."]
+margin_left = 267.76
+margin_top = 4.0
+margin_right = 316.76
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 4 )
+text = "Lives"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HighScore" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 2.66968
+custom_fonts/font = SubResource( 5 )
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[node name="Bubble" parent="." groups=[
+"bubbles",
+] instance=ExtResource( 7 )]
+
+[node name="StopButton" type="TextureButton" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 87.0
+margin_top = -73.2526
+margin_right = 135.0
+margin_bottom = -40.2526
+rect_scale = Vector2( 1.5, 1.5 )
+shortcut = SubResource( 7 )
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hover" type="AudioStreamPlayer" parent="StopButton"]
+stream = ExtResource( 10 )
+
+[node name="Pressed" type="AudioStreamPlayer" parent="StopButton"]
+stream = ExtResource( 9 )
+
+[node name="RunButton" type="TextureButton" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -160.829
+margin_top = -73.7183
+margin_right = -112.829
+margin_bottom = -40.7183
+rect_scale = Vector2( 1.5, 1.5 )
+shortcut = SubResource( 7 )
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hover" type="AudioStreamPlayer" parent="RunButton"]
+stream = ExtResource( 10 )
+
+[node name="Pressed" type="AudioStreamPlayer" parent="RunButton"]
+stream = ExtResource( 9 )
+
+[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="timeout" from="BubbleTimer" to="." method="_on_BubbleTimer_timeout"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="pressed" from="StopButton" to="Player" method="_on_StopButton_pressed"]
+[connection signal="pressed" from="RunButton" to="Player" method="_on_RunButton_pressed"]

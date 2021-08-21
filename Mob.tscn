@@ -1,0 +1,66 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/squid1.png" type="Texture" id=1]
+[ext_resource path="res://assets/squid2.png" type="Texture" id=2]
+[ext_resource path="res://assets/piranha2.png" type="Texture" id=3]
+[ext_resource path="res://assets/jellyfish2.png" type="Texture" id=4]
+[ext_resource path="res://assets/jellyfish1.png" type="Texture" id=5]
+[ext_resource path="res://assets/piranha1.png" type="Texture" id=6]
+[ext_resource path="res://Mob.gd" type="Script" id=7]
+[ext_resource path="res://assets/pufferfish2.png" type="Texture" id=8]
+[ext_resource path="res://assets/pufferfish1.png" type="Texture" id=9]
+[ext_resource path="res://Bubble.tscn" type="PackedScene" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "lula",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "ball",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "suamae",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "aguaviva",
+"speed": 2.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 10.5108
+height = 0.0
+
+[node name="Mob" type="RigidBody2D" groups=[
+"mobs",
+]]
+scale = Vector2( 1.5, 1.5 )
+collision_mask = 0
+mass = 0.1
+gravity_scale = 0.7
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2, 2 )
+frames = SubResource( 1 )
+animation = "lula"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="Bolha" parent="." instance=ExtResource( 10 )]
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
